@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear LocalStorage</title>
+</head>
+<body>
+    <h1>Clear LocalStorage</h1>
+    <button onclick="clearStorage()">Clear Language Preference</button>
+    <div id="status"></div>
+    
+    <script>
+        function clearStorage() {
+            localStorage.removeItem('language');
+            document.getElementById('status').innerHTML = 'LocalStorage cleared. Language preference reset to default.';
+            console.log('LocalStorage cleared. Language preference reset to default.');
+            console.log('Current localStorage:', Object.keys(localStorage));
+        }
+        
+        // Show current state
+        window.onload = function() {
+            const currentLang = localStorage.getItem('language');
+            document.getElementById('status').innerHTML = `Current language in localStorage: ${currentLang || 'None'}`;
+            console.log('Current language in localStorage:', currentLang);
+        };
+    </script>
+</body>
+</html>
