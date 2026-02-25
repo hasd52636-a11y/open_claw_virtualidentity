@@ -1903,9 +1903,11 @@ async function startServer() {
     });
     app.use(vite.middlewares);
   } else {
-    app.use(express.static(path.join(__dirname, "dist")));
+    // For Vercel deployment, use the correct path to static files
+    const staticPath = path.join(process.cwd(), "dist");
+    app.use(express.static(staticPath));
     app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "dist", "index.html"));
+      res.sendFile(path.join(staticPath, "index.html"));
     });
   }
 
