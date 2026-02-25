@@ -1590,13 +1590,14 @@ function generateIdentity(country: string, lang: string) {
   }
 }
 
+// Define app at module level for Vercel
+const app = express();
+const PORT = 3003;
+
+app.use(express.json({ limit: '10mb' }));
+app.use(cors());
+
 async function startServer() {
-  const app = express();
-  const PORT = 3003;
-
-  app.use(express.json({ limit: '10mb' }));
-  app.use(cors());
-
   // API Routes
   app.get("/api/emails/real", (req, res) => {
     const email = db.prepare("SELECT email FROM real_emails ORDER BY RANDOM() LIMIT 1").get() as { email: string };
@@ -1673,7 +1674,7 @@ async function startServer() {
         let avatarUrl;
         try {
           // Try to use Unsplash random user photos as first option
-          avatarUrl = `https://randomuser.me/api/portraits/${gender === 'Male' ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`;
+          avatarUrl = `https://randomuser.me/api/portraits/${identity.gender === 'Male' ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`;
         } catch (error) {
           // Fallback to placehold.co if randomuser fails
           console.log('Random user portrait failed, using placehold fallback');
