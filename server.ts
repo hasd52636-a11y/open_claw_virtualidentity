@@ -1911,12 +1911,18 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+  // Only start the server in non-Vercel environments
+  if (!process.env.VERCEL) {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }
 }
 
 // For Vercel deployment
 export default app;
 
-startServer();
+// Only start the server in non-Vercel environments
+if (!process.env.VERCEL) {
+  startServer();
+}
