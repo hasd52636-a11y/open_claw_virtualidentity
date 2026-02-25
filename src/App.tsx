@@ -37,6 +37,7 @@ import {
   Monitor,
   GraduationCap
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { motion, AnimatePresence } from 'motion/react';
 import * as XLSX from 'xlsx';
 
@@ -2069,6 +2070,7 @@ Watermark: ${id.watermark || 'N/A'}
           © 2026 IDENTITYGEN GLOBAL NETWORK • ALL RIGHTS RESERVED
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }
