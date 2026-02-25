@@ -1914,4 +1914,7 @@ async function startServer() {
   });
 }
 
+// For Vercel deployment
+export default app;
+
 startServer();
